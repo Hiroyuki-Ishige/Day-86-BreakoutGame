@@ -1,4 +1,4 @@
-from turtle import Turtle, Screen, onkeypress
+from turtle import Turtle
 
 
 class P_bar(Turtle):
@@ -17,5 +17,20 @@ class P_bar(Turtle):
         new_x = self.xcor() + 20
         self.goto(new_x, self.ycor())
 
-    Screen().onkeypress(move_left, "Left")
-    Screen().onkeypress(move_right, "Right")
+class Ball(Turtle):
+    def __init__(self, x, y, color):
+        super().__init__()
+        self.shape("circle")
+        self.fillcolor(color)
+        self.shapesize(stretch_wid=1, stretch_len=1)
+        self.setpos(x, y)
+
+    def ball_move(self):
+        count = 0
+        while count < 200:
+            self.goto(self.xcor()+1, self.ycor()+1)
+            count = count +1
+
+#TODO move ball with some sleep
+
+
