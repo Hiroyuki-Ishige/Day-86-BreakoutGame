@@ -1,6 +1,6 @@
-
+import time
 from turtle import Screen
-from bar import P_bar, Ball
+from bar import P_bar, Ball, Block
 
 # Fixed variables
 SCREEN_WIDTH = 600
@@ -19,25 +19,35 @@ sc.tracer(0) #Turn off screen update. 0 is off, 1 is on
 p_bar = P_bar(x=0, y=-350, color="white")
 
 # Create ball
-ball = Ball(x=0, y=-350, color="white", )
+ball = Ball(x=0, y=-340, color="white", )
 
-sc.tracer(1) #Turn on screen
-# -------------------------------------------------------
+# Create block
+number_block = range(0, 9)
+for i in number_block:
+    name = "block" + str(i)
+    name = Block(x=-250+i*60, y=330) #width of 1 block is 60
 
 # Set key listen ----------------------------------------
 sc.listen()
 sc.onkeypress(p_bar.move_left, "Left")
 sc.onkeypress(p_bar.move_right, "Right")
+
 # -------------------------------------------------------
+sc.tracer(1) #Turn on screen update
+game_is_on = True
+while game_is_on:
+    time.sleep(0.01)
+    # sc.update()
 
-ball.ball_move(p_bar=p_bar)
+    # Ball starts moving after all initial screen created
+    ball.ball_move(p_bar=p_bar)
+
+    #TODO Check ball hit block
+    name.ball_hit_block(ball=ball)
 
 
 
 
-# game_is_on = True
-# while game_is_on:
-#     sc.update() # To keep screen updating
 
 
 

@@ -54,10 +54,27 @@ class Ball(Turtle):
             print(f'ball{self.xcor(), self.ycor()}')
             print(f'bar{p_bar.xcor(), p_bar.ycor()}')
 
-            if p_bar.xcor() -30 < self.xcor() < p_bar.xcor() +30 and self.ycor() == p_bar.ycor():
+            # judget if ball hit bar
+            if p_bar.xcor() -30 < self.xcor() < p_bar.xcor() +30 and self.ycor() == p_bar.ycor()+10:
                 y_dir = y_dir * -1
                 self.goto(self.xcor() + x_dir, self.ycor() + y_dir)
 
 
 
 # TODO Pen up of ball
+
+
+class Block(Turtle):
+    def __init__(self,x, y):
+        super().__init__()  # inherit Turtle Class
+        self.shape("square")
+        self.fillcolor("white")
+        self.shapesize(stretch_wid=1, stretch_len=3)
+        self.setpos(x, y)
+
+    def ball_hit_block(self,ball):
+        ball_is_on = True
+
+        while ball_is_on:
+            if self.xcor() -30 < ball.xcor() < self.xcor() +30:
+                self.fillcolor("black")
