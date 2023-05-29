@@ -1,80 +1,24 @@
 from turtle import Turtle
 import time
 
+BAR_MOVE_DISTANCE = 20
+BAR_WIDTH = 4
+
 
 class P_bar(Turtle):
     def __init__(self, x, y, color):
         super().__init__()  # inherit Turtle Class
         self.shape("square")
         self.fillcolor(color)
-        self.shapesize(stretch_wid=1, stretch_len=4)
+        self.shapesize(stretch_wid=1, stretch_len=BAR_WIDTH) #Standard turtle size is 20 pixcel x 20 pixcel
         self.setpos(x, y)
 
     def move_left(self):
-        new_x = self.xcor() - 20
+        new_x = self.xcor() - BAR_MOVE_DISTANCE
         self.goto(new_x, self.ycor())
 
     def move_right(self):
-        new_x = self.xcor() + 20
+        new_x = self.xcor() + BAR_MOVE_DISTANCE
         self.goto(new_x, self.ycor())
 
 
-class Ball(Turtle):
-    def __init__(self, x, y, color):
-        super().__init__()
-        self.shape("circle")
-        self.fillcolor(color)
-        self.shapesize(stretch_wid=1, stretch_len=1)
-        self.setpos(x, y)
-
-
-    def ball_move(self,p_bar):
-        x_dir = 1
-        y_dir = 1
-        ball_is_on = True
-
-        while ball_is_on:
-            self.goto(self.xcor() + x_dir, self.ycor() + y_dir)
-
-            if self.xcor() == 290:
-                x_dir = x_dir*-1
-                self.goto(self.xcor() + x_dir, self.ycor() + y_dir)
-
-            if self.xcor() == -290:
-                x_dir = x_dir * -1
-                self.goto(self.xcor() + x_dir, self.ycor() + y_dir)
-
-            if self.ycor() == 390:
-                y_dir = y_dir *-1
-                self.goto(self.xcor() + x_dir, self.ycor() + y_dir)
-
-            if self.ycor() == -390:
-                    ball_is_on = False
-
-            print(f'ball{self.xcor(), self.ycor()}')
-            print(f'bar{p_bar.xcor(), p_bar.ycor()}')
-
-            # judget if ball hit bar
-            if p_bar.xcor() -30 < self.xcor() < p_bar.xcor() +30 and self.ycor() == p_bar.ycor()+10:
-                y_dir = y_dir * -1
-                self.goto(self.xcor() + x_dir, self.ycor() + y_dir)
-
-
-
-# TODO Pen up of ball
-
-
-class Block(Turtle):
-    def __init__(self,x, y):
-        super().__init__()  # inherit Turtle Class
-        self.shape("square")
-        self.fillcolor("white")
-        self.shapesize(stretch_wid=1, stretch_len=3)
-        self.setpos(x, y)
-
-    def ball_hit_block(self,ball):
-        ball_is_on = True
-
-        while ball_is_on:
-            if self.xcor() -30 < ball.xcor() < self.xcor() +30:
-                self.fillcolor("black")
