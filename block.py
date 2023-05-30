@@ -21,5 +21,3 @@ class Block_Manager:
                 self.all_blocks.append(new_block)
                 # print(self.all_blocks)
 
-
-#TODO ball out of range and game over
