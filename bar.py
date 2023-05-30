@@ -1,7 +1,7 @@
 from turtle import Turtle
 import time
 
-BAR_MOVE_DISTANCE = 20
+BAR_MOVE_DISTANCE = 40
 BAR_WIDTH = 4
 
 

@@ -15,7 +15,7 @@ sc.bgcolor("black")
 sc.title("Breakout")
 
 # create initial screen --------------------------------
-sc.tracer(0) #Turn off screen update. 0 is off, 1 is on
+sc.tracer(0)  # Turn off screen update. 0 is off, 1 is on
 
 # Create player bar
 p_bar = P_bar(x=0, y=-350, color="white")
@@ -24,9 +24,8 @@ p_bar = P_bar(x=0, y=-350, color="white")
 ball = Ball(x=0, y=-340, color="white", )
 
 # Create block
-block_manager = Block_Manager()
-block_manager.create_block()
-
+block_manager = Block_Manager()  # Create instance
+block_manager.create_block()  # Call method
 
 # Set key listen ----------------------------------------
 sc.listen()
@@ -34,23 +33,15 @@ sc.onkey(p_bar.move_left, "Left")
 sc.onkey(p_bar.move_right, "Right")
 
 # -------------------------------------------------------
-sc.tracer(1) #Turn on screen update
+sc.tracer(1)  # Turn on screen update
 game_is_on = True
 while game_is_on:
     time.sleep(0.01)
     # sc.update()
 
     # Ball starts moving after all initial screen created
-    ball.ball_move(p_bar=p_bar)
-
-    #TODO Check ball hit block
-    # name.ball_hit_block(ball=ball)
-
-
-
-
-
-
+    ball.ball_move(p_bar=p_bar, all_blocks=block_manager.all_blocks, ball=ball)
+    game_is_on = False
 
 sc.exitonclick()
 # mainloop()
@@ -72,8 +63,6 @@ Score
 1. Add score when ball hit's block
 
 """
-# TODO Set up block
+# TODO Check if all block erased and create new blocks
 # TODO Set up name, Score
-# TODO Set up judge hitting with block and erase block once it's hit with ball
-
 # TODO Set up score recording system

@@ -13,7 +13,7 @@ class Ball(Turtle):
         self.setpos(x, y)
 
 
-    def ball_move(self,p_bar):
+    def ball_move(self,p_bar, all_blocks, ball):
         x_dir = BALL_MOVE_DISTANCE
         y_dir = BALL_MOVE_DISTANCE
         ball_is_on = True
@@ -34,16 +34,17 @@ class Ball(Turtle):
                 self.goto(self.xcor() + x_dir, self.ycor() + y_dir)
 
             if self.ycor() == -390:
-                    ball_is_on = False
+                ball_is_on = False # move out roop
 
-            print(f'ball{self.xcor(), self.ycor()}')
-            print(f'bar{p_bar.xcor(), p_bar.ycor()}')
-
-            # judget if ball hit bar
             if p_bar.xcor() -30 < self.xcor() < p_bar.xcor() +30 and self.ycor() == p_bar.ycor()+10:
                 y_dir = y_dir * -1
                 self.goto(self.xcor() + x_dir, self.ycor() + y_dir)
 
-
-
-# TODO Pen up of ball
+            # check ball hits block. If ball hit, bound ball and erase block
+            for block in all_blocks:
+                if block.distance(ball) < 20:
+                    all_blocks.remove(block)
+                    print(all_blocks)
+                    block.fillcolor("black")
+                    y_dir = y_dir * -1
+                    self.goto(self.xcor() + x_dir, self.ycor() + y_dir)
