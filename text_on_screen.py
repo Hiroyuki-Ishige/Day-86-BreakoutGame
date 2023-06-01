@@ -1,5 +1,6 @@
 from turtle import Turtle
 
+
 def game_over():
     game_over = Turtle()
     game_over.color("white")
@@ -7,11 +8,22 @@ def game_over():
     game_over.write("Game over !!", move=False,
                     align="center", font=("Arial", 30, "bold"))
 
-def score():
-    score = Turtle()
-    score.penup()
-    score.color("white")
-    score.hideturtle()
-    score.setpos(0, 350)
-    score.write("Score:", move=False,
-                    align="center", font=("Arial", 20, "bold"))
+
+class Score(Turtle):
+    def __init__(self):
+        super().__init__()
+        self.point = 0
+        self.hideturtle()
+        self.penup()
+        self.goto(0, 350)
+        self.color("white")
+        self.update_score_board()
+
+    def update_score_board(self):
+        self.clear()
+        self.write(f'Score:{self.point}', move=False,
+                   align="center", font=("Arial", 20, "bold"))
+
+    def increase_score(self):
+        self.point += 1
+        self.update_score_board()

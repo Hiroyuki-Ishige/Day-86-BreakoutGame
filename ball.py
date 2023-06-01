@@ -1,6 +1,7 @@
 from turtle import Turtle
 import time
 
+
 BALL_MOVE_DISTANCE = 2
 
 
@@ -13,7 +14,7 @@ class Ball(Turtle):
         self.shapesize(stretch_wid=1, stretch_len=1)
         self.setpos(x, y)
 
-    def ball_move(self, p_bar, all_blocks, ball):
+    def ball_move(self, p_bar, all_blocks, ball, score):
         x_dir = BALL_MOVE_DISTANCE
         y_dir = BALL_MOVE_DISTANCE
         ball_is_on = True
@@ -43,11 +44,12 @@ class Ball(Turtle):
                 self.goto(self.xcor() + x_dir, self.ycor() + y_dir)
 
             # check ball hits block. If ball hit, bound ball and erase block
+            point = 0
             for block in all_blocks:
                 if block.distance(ball) < 20:
                     all_blocks.remove(block)
                     # print(all_blocks)
-                    score_count += 1
+                    score.increase_score()
 
                     block.fillcolor("black")
                     y_dir = y_dir * -1
