@@ -1,7 +1,6 @@
 from turtle import Turtle
 import time
 
-
 BALL_MOVE_DISTANCE = 2
 
 
@@ -13,12 +12,13 @@ class Ball(Turtle):
         self.fillcolor(color)
         self.shapesize(stretch_wid=1, stretch_len=1)
         self.setpos(x, y)
+        self.status = "game_on"
 
-    def ball_move(self, p_bar, all_blocks, ball, score):
+    def ball_move(self, p_bar, all_blocks, ball, score, stage):
         x_dir = BALL_MOVE_DISTANCE
         y_dir = BALL_MOVE_DISTANCE
         ball_is_on = True
-        score_count = 0
+        self.status = "game_on"
 
         while ball_is_on:
             self.goto(self.xcor() + x_dir, self.ycor() + y_dir)
@@ -35,7 +35,8 @@ class Ball(Turtle):
                 y_dir = y_dir * -1
                 self.goto(self.xcor() + x_dir, self.ycor() + y_dir)
 
-            if self.ycor() == -390:
+            if self.ycor() == -390:  # if ball go out of bottom screen
+                self.status = "game_off"
                 ball_is_on = False  # move out roop
 
             if p_bar.xcor() - 40 < self.xcor() < p_bar.xcor() + 40 and self.ycor() == p_bar.ycor() + 10:
@@ -44,9 +45,9 @@ class Ball(Turtle):
                 self.goto(self.xcor() + x_dir, self.ycor() + y_dir)
 
             # check ball hits block. If ball hit, bound ball and erase block
-            point = 0
+
             for block in all_blocks:
-                if block.distance(ball) < 20:
+                if block.distance(ball) < 25:
                     all_blocks.remove(block)
                     # print(all_blocks)
                     score.increase_score()
@@ -54,3 +55,8 @@ class Ball(Turtle):
                     block.fillcolor("black")
                     y_dir = y_dir * -1
                     self.goto(self.xcor() + x_dir, self.ycor() + y_dir)
+
+            if not all_blocks:
+                ball_is_on = False
+                stage.increase_stage()
+                # return "up_stage"

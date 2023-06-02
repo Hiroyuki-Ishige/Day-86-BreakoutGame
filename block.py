@@ -3,14 +3,16 @@ import time
 import random
 
 COLORS = ["red", "orange", "yellow", "green", "blue", "purple"]
+BLOCK_ROW = 1 # How many rows to create
+BLOCK_COLUMN = 2 # How many blocks in horizontally (standard is 8)
 
 class Block_Manager:
 
     def __init__(self):
         self.all_blocks =[]
     def create_block(self):
-        number_block = range(0, 8)
-        rows = range (0,4)
+        number_block = range(0, BLOCK_COLUMN)
+        rows = range (0,BLOCK_ROW)
         for row in rows:
             for i in number_block:
                 new_block = Turtle("square")

@@ -27,3 +27,22 @@ class Score(Turtle):
     def increase_score(self):
         self.point += 1
         self.update_score_board()
+
+class Stage(Turtle):
+    def __init__(self):
+        super().__init__()
+        self.stage = 1
+        self.hideturtle()
+        self.penup()
+        self.goto(200, 350)
+        self.color("white")
+        self.show_stage()
+
+    def show_stage(self):
+        self.clear()
+        self.write(f'Stage:{self.stage} ', move=False,
+                   align="center", font=("Arial", 20, "bold"))
+
+    def increase_stage(self):
+        self.stage += 1
+        self.show_stage()
