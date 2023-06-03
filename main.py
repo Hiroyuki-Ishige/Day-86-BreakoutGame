@@ -3,7 +3,7 @@ from turtle import Screen, Turtle
 from bar import P_bar
 from ball import Ball
 from block import Block_Manager
-from text_on_screen import game_over, Score, Stage
+from text_on_screen import game_over, Score, Stage, PlayerName
 
 # Fixed variables
 SCREEN_WIDTH = 600
@@ -37,7 +37,9 @@ sc.onkey(p_bar.move_right, "Right")
 
 # -------------------------------------------------------
 
+
 game_is_on = True
+ball_speed = 0
 while game_is_on:
     time.sleep(0.01)
 
@@ -47,10 +49,14 @@ while game_is_on:
     sc.tracer(1)  # Turn on screen update
 
     # Ball starts moving after all initial screen created
-    ball.ball_move(p_bar=p_bar, all_blocks=block_manager.all_blocks, ball=ball, score=score, stage=stage)
+    ball.ball_move(p_bar=p_bar, all_blocks=block_manager.all_blocks, ball=ball,
+                   score=score, stage=stage, ball_speed=ball_speed)
     if ball.status == "game_on": # if ball roop is out by all block clear
         sc.tracer(0)
         ball.goto(0, -340)
+        if ball_speed < 11:
+            ball_speed +=1
+        print(ball_speed)
     else:
         game_is_on = False
 
@@ -76,6 +82,5 @@ Score
 1. Add score when ball hit's block
 
 """
-# TODO Create new blocks with slightly another position
-# TODO increase level, ball speed
+# TODO ask player's name at initial screen
 # TODO Set up score recording system

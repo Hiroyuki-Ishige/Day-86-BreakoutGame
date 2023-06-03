@@ -46,3 +46,18 @@ class Stage(Turtle):
     def increase_stage(self):
         self.stage += 1
         self.show_stage()
+
+class PlayerName(Turtle):
+    def __init__(self):
+        super().__init__()
+        self.hideturtle()
+        self.penup()
+        self.goto(-200, 350)
+        self.color("white")
+
+
+
+    def show_name(self, player):
+        self.clear()
+        self.write(f'Player:{player} ', move=False,
+                   align="center", font=("Arial", 20, "bold"))
