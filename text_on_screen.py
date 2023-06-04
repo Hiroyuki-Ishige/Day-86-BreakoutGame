@@ -52,7 +52,7 @@ class PlayerName(Turtle):
         super().__init__()
         self.hideturtle()
         self.penup()
-        self.goto(-200, 350)
+        self.goto(-270, -380)
         self.color("white")
 
 
@@ -60,4 +60,4 @@ class PlayerName(Turtle):
     def show_name(self, player):
         self.clear()
         self.write(f'Player:{player} ', move=False,
-                   align="center", font=("Arial", 20, "bold"))
+                   align="left", font=("Arial", 20, "bold"))

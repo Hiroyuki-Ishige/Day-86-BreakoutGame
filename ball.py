@@ -41,13 +41,15 @@ class Ball(Turtle):
                 self.status = "game_off"
                 ball_is_on = False  # move out roop
 
+
+
+
             if p_bar.xcor() - 40 < self.xcor() < p_bar.xcor() + 40 and self.ycor() == p_bar.ycor() + 10:
                 # if p_bar.distance(ball) < 20:
                 y_dir = y_dir * -1
                 self.goto(self.xcor() + x_dir, self.ycor() + y_dir)
 
-            # check ball hits block. If ball hit, bound ball and erase block
-
+            # check if ball hits blocks. If yes, bound ball and erase block
             for block in all_blocks:
                 if block.distance(ball) < 25:
                     all_blocks.remove(block)
@@ -65,3 +67,4 @@ class Ball(Turtle):
 
                 # return "up_stage"
 
+            # return score

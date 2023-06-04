@@ -1,4 +1,5 @@
 import time
+from datetime import datetime
 from turtle import Screen, Turtle
 from bar import P_bar
 from ball import Ball
@@ -19,16 +20,19 @@ sc.title("Breakout")
 sc.tracer(0)  # Turn off screen update. 0 is off, 1 is on
 
 # Create player bar
-p_bar = P_bar(x=0, y=-350, color="white")
+p_bar = P_bar(x=0, y=-330, color="white")
 
 # Create ball
-ball = Ball(x=0, y=-340, color="white", )
-
-
+ball = Ball(x=0, y=-320, color="white", )
 
 # Show score
 score = Score()
 stage = Stage()
+
+# Show player name
+player_name = sc.textinput("Welcome to Breakout game!!", "Input player name")
+player = PlayerName()
+player.show_name(player_name)
 
 # Set key listen ----------------------------------------
 sc.listen()
@@ -51,16 +55,27 @@ while game_is_on:
     # Ball starts moving after all initial screen created
     ball.ball_move(p_bar=p_bar, all_blocks=block_manager.all_blocks, ball=ball,
                    score=score, stage=stage, ball_speed=ball_speed)
-    if ball.status == "game_on": # if ball roop is out by all block clear
+    if ball.status == "game_on":  # if ball roop is out by all block clear
         sc.tracer(0)
         ball.goto(0, -340)
         if ball_speed < 11:
-            ball_speed +=1
+            ball_speed += 1
         print(ball_speed)
     else:
         game_is_on = False
 
+        score_dict = {
+            "name":player_name,
+            "score":str(getattr(score, "point")),
+            "date&time": datetime.now().strftime("%d/%b/%Y %H:%M:%S")
+        }
+
+        with open("record_score.txt", "w") as f:
+            f.write(str(score_dict))
+
 game_over()
+
+
 
 sc.exitonclick()
 # mainloop()
@@ -82,5 +97,4 @@ Score
 1. Add score when ball hit's block
 
 """
-# TODO ask player's name at initial screen
-# TODO Set up score recording system
+# TODO Set up score recording system.Write to file for multiple score (now only 1 score)
