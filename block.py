@@ -4,7 +4,7 @@ import random
 
 COLORS = ["red", "orange", "yellow", "green", "blue", "purple"]
 BLOCK_ROW = 1  # How many rows to create
-BLOCK_COLUMN = 5  # How many blocks in horizontally (standard is 8)
+BLOCK_COLUMN = 2  # How many blocks in horizontally (standard is 8)
 BLOCK_PLACE = random.randint(0, 50)  # set first block at left side
 
 

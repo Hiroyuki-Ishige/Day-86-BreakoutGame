@@ -23,7 +23,7 @@ sc.tracer(0)  # Turn off screen update. 0 is off, 1 is on
 p_bar = P_bar(x=0, y=-330, color="white")
 
 # Create ball
-ball = Ball(x=0, y=-320, color="white", )
+ball = Ball(x=0, y=-300, color="white", )
 
 # Show score
 score = Score()
@@ -57,7 +57,7 @@ while game_is_on:
                    score=score, stage=stage, ball_speed=ball_speed)
     if ball.status == "game_on":  # if ball roop is out by all block clear
         sc.tracer(0)
-        ball.goto(0, -340)
+        ball.goto(0, -300)
         if ball_speed < 11:
             ball_speed += 1
         print(ball_speed)
@@ -65,17 +65,17 @@ while game_is_on:
         game_is_on = False
 
         score_dict = {
-            "name":player_name,
-            "score":str(getattr(score, "point")),
-            "date&time": datetime.now().strftime("%d/%b/%Y %H:%M:%S")
+            player_name: {
+                "score": str(getattr(score, "point")),
+                "stage": str(getattr(stage, "stage")),
+                "date&time": datetime.now().strftime("%d/%b/%Y %H:%M:%S")
+            }
         }
 
-        with open("record_score.txt", "w") as f:
+        with open("record_score.txt", "a") as f:
             f.write(str(score_dict))
 
 game_over()
-
-
 
 sc.exitonclick()
 # mainloop()
@@ -98,3 +98,8 @@ Score
 
 """
 # TODO Set up score recording system.Write to file for multiple score (now only 1 score)
+'''
+1. Read disctionary from the file
+2. Append new score to the dictionary
+3. write new score into the dictionary
+'''
