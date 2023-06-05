@@ -1,3 +1,4 @@
+import json
 import time
 from datetime import datetime
 from turtle import Screen, Turtle
@@ -60,20 +61,30 @@ while game_is_on:
         ball.goto(0, -300)
         if ball_speed < 11:
             ball_speed += 1
-        print(ball_speed)
+        # print(ball_speed)
     else:
         game_is_on = False
 
-        score_dict = {
-            player_name: {
-                "score": str(getattr(score, "point")),
-                "stage": str(getattr(stage, "stage")),
-                "date&time": datetime.now().strftime("%d/%b/%Y %H:%M:%S")
-            }
+        score_dict = {}
+        try:
+            with open("record_score.json", ) as f:
+                # f.write(str(score_dict))
+                score_dict = json.load(f)
+
+            print(f'score_dict1{score_dict}')
+        except:
+            pass
+
+        score_dict[player_name] = {
+            "score": str(getattr(score, "point")),
+            "stage": str(getattr(stage, "stage")),
+            "date&time": datetime.now().strftime("%d/%b/%Y %H:%M:%S")
         }
 
-        with open("record_score.txt", "a") as f:
-            f.write(str(score_dict))
+        with open("record_score.json", mode="w") as f:
+            json.dump(score_dict, f, indent=4)
+
+        print(f'score_dict2{score_dict}')
 
 game_over()
 
@@ -98,6 +109,7 @@ Score
 
 """
 # TODO Set up score recording system.Write to file for multiple score (now only 1 score)
+# TODO show score record after game over
 '''
 1. Read disctionary from the file
 2. Append new score to the dictionary
