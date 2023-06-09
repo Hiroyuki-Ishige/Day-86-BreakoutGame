@@ -1,15 +1,24 @@
 from turtle import Turtle
+import pprint
 
-
-def game_over():
+def game_over(score_list):
     game_over = Turtle()
     game_over.color("white")
     game_over.hideturtle()
-    game_over.write("Game over !!", move=False,
-                    align="center", font=("Arial", 30, "bold"))
+    game_over.penup()
+    game_over.goto(0,150)
+
+    game_over.write(f'Game over !!\n\n'
+                    'Top 5 High score\n'
+                    f'Player:{score_list[0]["player"]}'
+                    ,
 
 
-class Score(Turtle):
+                    move=False,
+                    align="center", font=("Arial", 25, "bold"))
+
+
+class Score(Turtle): # show score on screen
     def __init__(self):
         super().__init__()
         self.point = 0
@@ -28,7 +37,7 @@ class Score(Turtle):
         self.point += 1
         self.update_score_board()
 
-class Stage(Turtle):
+class Stage(Turtle): # show stage number on screen
     def __init__(self):
         super().__init__()
         self.stage = 1
@@ -47,7 +56,7 @@ class Stage(Turtle):
         self.stage += 1
         self.show_stage()
 
-class PlayerName(Turtle):
+class PlayerName(Turtle): #show player name on screen
     def __init__(self):
         super().__init__()
         self.hideturtle()

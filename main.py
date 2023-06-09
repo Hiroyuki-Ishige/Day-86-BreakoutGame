@@ -6,6 +6,10 @@ from bar import P_bar
 from ball import Ball
 from block import Block_Manager
 from text_on_screen import game_over, Score, Stage, PlayerName
+from tkinter import *
+from tkinter import messagebox
+import pickle
+import pprint
 
 # Fixed variables
 SCREEN_WIDTH = 600
@@ -65,28 +69,32 @@ while game_is_on:
     else:
         game_is_on = False
 
-        score_dict = {}
-        try:
-            with open("record_score.json", ) as f:
-                # f.write(str(score_dict))
-                score_dict = json.load(f)
+        score_list = []
 
-            print(f'score_dict1{score_dict}')
+        try:
+            with open("record_score.txt", "rb",) as f:
+                score_list = pickle.load(f) #read list
+
+
         except:
             pass
 
-        score_dict[player_name] = {
-            "score": str(getattr(score, "point")),
-            "stage": str(getattr(stage, "stage")),
-            "date&time": datetime.now().strftime("%d/%b/%Y %H:%M:%S")
-        }
+        score_list.append(
+            {
+                "player": player_name,
+                "score": str(getattr(score, "point")),
+                "stage": str(getattr(stage, "stage")),
+                "date&time": datetime.now().strftime("%d/%b/%Y %H:%M:%S")
+            })
 
-        with open("record_score.json", mode="w") as f:
-            json.dump(score_dict, f, indent=4)
+        score_list = sorted(score_list, key=lambda x: x["score"], reverse=True) #Sort score list by score
+        print("Test1")
+        pprint.pprint(score_list)
 
-        print(f'score_dict2{score_dict}')
+        with open("record_score.txt", mode="wb",) as f:
+            pickle.dump(score_list, f) #Save list
 
-game_over()
+game_over(score_list)
 
 sc.exitonclick()
 # mainloop()
@@ -108,8 +116,7 @@ Score
 1. Add score when ball hit's block
 
 """
-# TODO Set up score recording system.Write to file for multiple score (now only 1 score)
-# TODO show score record after game over
+# TODO show score record after game over (update layout)
 '''
 1. Read disctionary from the file
 2. Append new score to the dictionary
