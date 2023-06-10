@@ -15,7 +15,7 @@ def game_over(score_list):
     count = 1
     for i in score_list:
 
-        if count <5:
+        if count <6:
             show_score=Turtle()
             show_score.color("white")
             show_score.hideturtle()
