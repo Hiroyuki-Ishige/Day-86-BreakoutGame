@@ -71,9 +71,9 @@ while game_is_on:
 
         score_list = []
 
-        try:
+        try: #check if data in the file
             with open("record_score.txt", "rb",) as f:
-                score_list = pickle.load(f) #read list
+                score_list = pickle.load(f) #read file by list type
 
 
         except:
@@ -82,13 +82,13 @@ while game_is_on:
         score_list.append(
             {
                 "player": player_name,
-                "score": str(getattr(score, "point")),
-                "stage": str(getattr(stage, "stage")),
+                "score": getattr(score, "point"),
+                "stage": getattr(stage, "stage"),
                 "date&time": datetime.now().strftime("%d/%b/%Y %H:%M:%S")
             })
 
         score_list = sorted(score_list, key=lambda x: x["score"], reverse=True) #Sort score list by score
-        print("Test1")
+
         pprint.pprint(score_list)
 
         with open("record_score.txt", mode="wb",) as f:
@@ -116,7 +116,7 @@ Score
 1. Add score when ball hit's block
 
 """
-# TODO show score record after game over (update layout)
+# TODO show play again?
 '''
 1. Read disctionary from the file
 2. Append new score to the dictionary

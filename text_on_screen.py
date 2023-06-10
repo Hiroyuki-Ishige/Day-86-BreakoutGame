@@ -6,17 +6,26 @@ def game_over(score_list):
     game_over.color("white")
     game_over.hideturtle()
     game_over.penup()
-    game_over.goto(0,150)
-
+    game_over.goto(0,0)
     game_over.write(f'Game over !!\n\n'
-                    'Top 5 High score\n'
-                    f'Player:{score_list[0]["player"]}'
-                    ,
-
-
+                    'Top 5 High score\n',
                     move=False,
                     align="center", font=("Arial", 25, "bold"))
 
+    count = 1
+    for i in score_list:
+
+        if count <5:
+            show_score=Turtle()
+            show_score.color("white")
+            show_score.hideturtle()
+            show_score.penup()
+            show_score.goto(0, -40*count)
+
+            show_score.write(f'Player:{i["player"]} - Stage:{i["stage"]} - Score:{i["score"]}\n',
+                            # move=False,
+                            align="center", font=("Arial", 20, "bold"))
+            count+=1
 
 class Score(Turtle): # show score on screen
     def __init__(self):
